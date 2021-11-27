@@ -25,7 +25,7 @@ public class AlphaBetaDFS extends AI{
                 root.bestChild = node;
                 root.mark = MAX * (-board[p.y][p.x]);
                 board[p.y][p.x] = 0;
-                return;
+                return ;
             }
             boolean[] flags = new boolean[8];
             Arrays.fill(flags, true);
@@ -42,15 +42,15 @@ public class AlphaBetaDFS extends AI{
             DFS(deep+1,root.getLastChild(),alpha,beta,board);
             board[p.y][p.x] = 0;
             toJudge.add(p);
-            for(int i=0;i<8;++i)
+            for(int i = 0; i < 8; i++)
                 if(flags[i])
                     toJudge.remove(new Point(p.x+dc[i],p.y+dr[i]));
             // alpha beta剪枝
             // min层  deep为奇数
             if((deep&1)==1){
                 if(root.bestChild == null || root.getLastChild().mark < root.bestChild.mark){
-                    root.bestChild=root.getLastChild();
-                    root.mark=root.bestChild.mark;
+                    root.bestChild = root.getLastChild();
+                    root.mark = root.bestChild.mark;
                     if(root.mark <= MIN)
                         root.mark += deep;
                     beta=Math.min(root.mark,beta);
@@ -60,8 +60,8 @@ public class AlphaBetaDFS extends AI{
             }
             // max层  deep为偶数
             else{
-                if(root.bestChild==null || root.getLastChild().mark>root.bestChild.mark){
-                    root.bestChild=root.getLastChild();
+                if(root.bestChild == null || root.getLastChild().mark > root.bestChild.mark){
+                    root.bestChild = root.getLastChild();
                     root.mark = root.bestChild.mark;
                     if(root.mark == MAX)
                         root.mark -= deep;
